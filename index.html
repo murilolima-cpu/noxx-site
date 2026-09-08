@@ -82,7 +82,7 @@ img{max-width:100%;display:block;}
 /* ===== nav ===== */
 header{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
 nav{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;max-width:1180px;margin:0 auto;gap:24px;}
-.wordmark{font-family:'Poppins',sans-serif;font-weight:900;font-size:20px;letter-spacing:0.01em;color:var(--text);}
+.wordmark{height:30px;width:auto;display:block;}
 .nav-links{display:flex;gap:28px;list-style:none;margin:0;padding:0;}
 .nav-links a{font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:1.3px;color:var(--text-soft);position:relative;padding-bottom:3px;}
 .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1.5px;background:var(--accent);transition:right .25s ease;}
@@ -207,7 +207,7 @@ footer{padding:42px 0 30px;border-top:1px solid var(--line);}
 
 <header>
   <nav>
-    <div class="wordmark">NOXX</div>
+    <img class="wordmark" src="logo-icon.png" alt="Noxx Accounting for Life">
     <ul class="nav-links">
       <li><a href="#sobre">Sobre</a></li>
       <li><a href="#servicos">Serviços</a></li>
