@@ -128,6 +128,8 @@ section{padding:88px 0;}
 .kicker{font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:2.1px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
 .kicker::before{content:"";width:22px;height:1.5px;background:currentColor;}
 h2.title{font-size:clamp(27px,3.5vw,40px);margin:0 0 14px;line-height:1.08;}
+@keyframes kickerPulse{0%{transform:scale(1);}35%{transform:scale(1.1);}100%{transform:scale(1);}}
+.section-flash .kicker{animation:kickerPulse .5s ease;}
 .section-head p{color:var(--text-soft);font-size:16.5px;line-height:1.7;}
 
 /* ===== timeline ===== */
@@ -466,6 +468,23 @@ footer{padding:42px 0 30px;border-top:1px solid var(--line);}
     <span>RUA CASTILHO 13D · LISBOA</span>
   </div>
 </footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(function(link){
+  link.addEventListener('click', function(e){
+    var target = document.getElementById(link.getAttribute('href').slice(1));
+    if(!target) return;
+    e.preventDefault();
+    var headerH = document.querySelector('header').offsetHeight;
+    var y = target.getBoundingClientRect().top + window.pageYOffset - headerH - 12;
+    window.scrollTo({top:y, behavior:'smooth'});
+    target.classList.remove('section-flash');
+    void target.offsetWidth;
+    target.classList.add('section-flash');
+    setTimeout(function(){ target.classList.remove('section-flash'); }, 700);
+  });
+});
+</script>
 
 </body>
 </html>
