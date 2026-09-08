@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noxx Accounting for Life</title>
+<meta name="description" content="Contabilidade, fiscalidade e gestão em Lisboa desde 1972. Empresas, particulares e clientes internacionais.">
+<link rel="icon" type="image/png" href="logo-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F7F9;
+  --surface:#FFFFFF;
+  --text:#14213D;
+  --text-soft:#5B6B78;
+  --text-faint:#98A2AD;
+  --line: rgba(20,33,61,0.12);
+  --accent:#2A4867;
+  --accent-hover:#3B5C7E;
+  --accent-contrast:#FFFFFF;
+  --accent-wash: rgba(42,72,103,0.07);
+  --shadow-sm: 0 2px 10px rgba(20,33,61,0.06);
+  --shadow-md: 0 10px 26px rgba(20,33,61,0.10);
+  --shadow-lg: 0 22px 50px rgba(20,33,61,0.14);
+  --nav-bg: rgba(246,247,249,0.85);
+  --band-bg:#14213D;
+  --band-fg:#FFFFFF;
+  --band-fg-soft:#B9C2D0;
+  --band-accent:#8FA8C7;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1220;
+    --surface:#121F33;
+    --text:#E7ECF3;
+    --text-soft:#9AA8C0;
+    --text-faint:#7C8CA6;
+    --line: rgba(231,236,243,0.12);
+    --accent:#7C9BC4;
+    --accent-hover:#9AB5D8;
+    --accent-contrast:#0B1220;
+    --accent-wash: rgba(124,155,196,0.14);
+    --shadow-sm: 0 2px 10px rgba(0,0,0,0.3);
+    --shadow-md: 0 10px 26px rgba(0,0,0,0.4);
+    --shadow-lg: 0 22px 50px rgba(0,0,0,0.5);
+    --nav-bg: rgba(11,18,32,0.8);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1220;
+  --surface:#121F33;
+  --text:#E7ECF3;
+  --text-soft:#9AA8C0;
+  --text-faint:#7C8CA6;
+  --line: rgba(231,236,243,0.12);
+  --accent:#7C9BC4;
+  --accent-hover:#9AB5D8;
+  --accent-contrast:#0B1220;
+  --accent-wash: rgba(124,155,196,0.14);
+  --shadow-sm: 0 2px 10px rgba(0,0,0,0.3);
+  --shadow-md: 0 10px 26px rgba(0,0,0,0.4);
+  --shadow-lg: 0 22px 50px rgba(0,0,0,0.5);
+  --nav-bg: rgba(11,18,32,0.8);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;line-height:1.6;
+}
+h1,h2,h3,.disp{font-family:'Poppins',sans-serif;font-weight:900;letter-spacing:0;text-wrap:balance;}
+a{color:inherit;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+.tnum{font-variant-numeric:tabular-nums;}
+@media (prefers-reduced-motion: reduce){ *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important;} }
+
+/* ===== nav ===== */
+header{position:sticky;top:0;z-index:50;background:var(--nav-bg);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+nav{display:flex;align-items:center;justify-content:space-between;padding:18px 32px;max-width:1180px;margin:0 auto;gap:24px;}
+.wordmark{font-family:'Poppins',sans-serif;font-weight:900;font-size:20px;letter-spacing:0.01em;color:var(--text);}
+.nav-links{display:flex;gap:28px;list-style:none;margin:0;padding:0;}
+.nav-links a{font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:1.3px;color:var(--text-soft);position:relative;padding-bottom:3px;}
+.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1.5px;background:var(--accent);transition:right .25s ease;}
+.nav-links a:hover{color:var(--text);}
+.nav-links a:hover::after{right:0;}
+.nav-cta{font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:1.3px;background:var(--accent);color:var(--accent-contrast);padding:11px 20px;border-radius:10px;white-space:nowrap;transition:background .2s;}
+.nav-cta:hover{background:var(--accent-hover);}
+@media (max-width:820px){.nav-links{display:none;}}
+
+/* ===== ticker ===== */
+.ticker-band{background:var(--band-bg);overflow:hidden;}
+.ticker-track{display:flex;width:max-content;animation:tick 34s linear infinite;padding:9px 0;}
+.ticker-track span{font-family:'Inter',sans-serif;font-weight:500;font-size:12px;letter-spacing:1.3px;text-transform:uppercase;padding:0 22px;white-space:nowrap;color:var(--band-fg-soft);display:flex;align-items:center;gap:10px;}
+.ticker-track span::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--band-fg-soft);opacity:0.7;}
+.ticker-track span.hot{color:var(--band-fg);font-weight:700;}
+.ticker-track span.hot::before{background:var(--band-accent);}
+@keyframes tick{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ===== hero ===== */
+.hero{padding:78px 0 56px;border-bottom:1px solid var(--line);}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent);margin-bottom:24px;}
+.hero-eyebrow::before{content:"";width:24px;height:1.5px;background:var(--accent);}
+h1.headline{color:var(--text);font-size:clamp(38px,6.4vw,76px);line-height:1.03;margin:0 0 22px;letter-spacing:-0.02em;}
+.hero-lead{max-width:54ch;color:var(--text-soft);font-size:18px;line-height:1.7;margin:0 0 32px;}
+.hero-cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px;}
+.btn{font-family:'Inter',sans-serif;font-weight:600;font-size:13.5px;padding:14px 26px;border-radius:10px;display:inline-flex;align-items:center;gap:9px;transition:background .2s ease, border-color .2s ease, color .2s ease;}
+.btn-solid{background:var(--accent);color:var(--accent-contrast);border:1.5px solid var(--accent);}
+.btn-solid:hover{background:var(--accent-hover);border-color:var(--accent-hover);}
+.btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--text);}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm);max-width:640px;}
+.stat-row .cell{padding:22px 26px;border-left:1px solid var(--line);}
+.stat-row .cell:first-child{border-left:none;}
+.stat-row .n{font-family:'Poppins',sans-serif;font-weight:800;font-size:clamp(28px,3.2vw,38px);color:var(--text);display:block;}
+.stat-row .l{font-family:'Inter',sans-serif;font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:1.1px;color:var(--text-soft);margin-top:4px;display:block;}
+@media (max-width:700px){.stat-row{grid-template-columns:1fr;}.stat-row .cell{border-left:none;border-top:1px solid var(--line);}.stat-row .cell:first-child{border-top:none;}}
+
+/* ===== section shell ===== */
+section{padding:88px 0;}
+.section-head{margin-bottom:46px;max-width:60ch;}
+.kicker{font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:2.1px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.kicker::before{content:"";width:22px;height:1.5px;background:currentColor;}
+h2.title{font-size:clamp(27px,3.5vw,40px);margin:0 0 14px;line-height:1.08;}
+.section-head p{color:var(--text-soft);font-size:16.5px;line-height:1.7;}
+
+/* ===== timeline ===== */
+.entries{position:relative;padding-left:30px;}
+.entries::before{content:"";position:absolute;left:5px;top:6px;bottom:10px;width:2px;background:var(--line);border-radius:2px;}
+.entry{position:relative;padding-bottom:34px;}
+.entry::before{content:"";position:absolute;left:-30px;top:3px;width:13px;height:13px;border-radius:50%;background:var(--surface);border:3px solid var(--accent);}
+.entry:last-child{padding-bottom:0;}
+.entry .yr{font-family:'Inter',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:6px;}
+.entry h3{margin:0 0 8px;font-size:20px;}
+.entry p{margin:0;color:var(--text-soft);max-width:62ch;}
+
+/* ===== services ===== */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.svc-col{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px 26px;box-shadow:var(--shadow-sm);transition:transform .2s ease, box-shadow .2s ease;}
+.svc-col:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);}
+.svc-icon{width:44px;height:44px;border-radius:12px;background:var(--accent-wash);color:var(--accent);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.svc-icon svg{width:22px;height:22px;}
+.svc-col h3{font-size:17px;margin:0 0 8px;}
+.svc-col .desc{color:var(--text-soft);font-size:14.5px;line-height:1.6;margin-bottom:18px;}
+.svc-col ul{list-style:none;margin:0;padding:0;}
+.svc-col li{padding:7px 0;font-size:14.5px;display:flex;align-items:center;gap:10px;color:var(--text);}
+.svc-col li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);flex:none;}
+@media (max-width:820px){.svc-grid{grid-template-columns:1fr;}}
+
+/* ===== global network band ===== */
+.globe-panel{position:relative;background:var(--band-bg);border-radius:26px;padding:48px 30px 36px;box-shadow:var(--shadow-lg);}
+.globe-wrap{max-width:400px;margin:0 auto 34px;text-align:center;}
+.globe-svg{width:100%;height:auto;overflow:visible;}
+.globe-ring{fill:none;stroke:rgba(255,255,255,0.16);stroke-width:1;}
+.globe-spokes line{stroke:var(--band-accent);stroke-width:1;opacity:0.4;}
+.globe-nodes .node{fill:var(--band-accent);stroke:var(--band-bg);stroke-width:1.5;}
+.globe-nodes .node-label{font-family:'Inter',sans-serif;font-weight:600;font-size:8.5px;letter-spacing:0.4px;fill:var(--band-fg-soft);}
+.hub{fill:#FFFFFF;}
+.hub-pulse{fill:none;stroke:var(--band-accent);stroke-width:2;transform-origin:170px 190px;animation:hubpulse 2.6s ease-out infinite;}
+@keyframes hubpulse{0%{r:6;opacity:0.6;}75%{r:28;opacity:0;}100%{r:28;opacity:0;}}
+.hub-caption{margin-top:14px;font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:1.1px;color:var(--band-fg-soft);display:inline-flex;align-items:center;gap:8px;}
+.hub-caption .dot{width:8px;height:8px;border-radius:50%;background:var(--band-accent);display:inline-block;}
+@media (prefers-reduced-motion: reduce){.hub-pulse{animation:none;opacity:0;}}
+.flags{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;}
+.flag{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);border-radius:999px;padding:7px 15px;font-family:'Inter',sans-serif;font-weight:500;font-size:12.5px;display:flex;align-items:center;gap:6px;color:var(--band-fg-soft);}
+.flag b{color:var(--band-accent);font-weight:700;font-size:11px;letter-spacing:0.5px;}
+
+/* ===== team ===== */
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.team-row{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px 16px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .2s ease, box-shadow .2s ease;display:flex;flex-direction:column;align-items:center;}
+.team-row:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);}
+.team-row .avatar{width:72px;height:72px;border-radius:50%;background:var(--accent-wash);background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:700;font-size:19px;color:var(--accent);overflow:hidden;margin-bottom:14px;}
+.team-row .avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.team-row h3{margin:0;font-size:15.5px;}
+.team-row .role{font-family:'Inter',sans-serif;font-weight:600;font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--text-soft);margin:5px 0 8px;}
+.team-row a{font-size:12.5px;color:var(--accent);text-decoration:none;word-break:break-word;}
+.team-row a:hover{text-decoration:underline;}
+@media (max-width:900px){.team-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:480px){.team-grid{grid-template-columns:1fr;}}
+
+/* ===== contact ===== */
+.contact-panel{background:var(--band-bg);border-radius:26px;padding:48px;box-shadow:var(--shadow-lg);color:var(--band-fg);}
+.contact-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:start;}
+.contact-info .row{padding:17px 0;border-top:1px solid rgba(255,255,255,0.12);}
+.contact-info .row:first-child{border-top:none;padding-top:0;}
+.contact-info h4{font-family:'Inter',sans-serif;font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:1.3px;color:var(--band-accent);margin:0 0 8px;}
+.contact-info p{margin:0;color:var(--band-fg-soft);line-height:1.7;}
+.map-embed{margin-top:22px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);border-radius:999px;transition:background .2s;}
+.map-embed:hover{background:rgba(255,255,255,0.12);}
+.cta-block{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);border-radius:20px;padding:34px;}
+.cta-block .big{font-family:'Poppins',sans-serif;font-weight:800;font-size:clamp(23px,2.6vw,30px);line-height:1.18;margin:0 0 16px;}
+.cta-block p.sub{color:var(--band-fg-soft);margin:0 0 24px;}
+.cta-block .btn-solid{background:#FFFFFF;color:var(--band-bg);border-color:#FFFFFF;}
+.cta-block .btn-solid:hover{background:var(--band-fg-soft);border-color:var(--band-fg-soft);}
+
+/* ===== footer ===== */
+footer{padding:42px 0 30px;border-top:1px solid var(--line);}
+.foot-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-family:'Inter',sans-serif;font-weight:500;font-size:12px;color:var(--text-soft);letter-spacing:0.3px;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="wordmark">NOXX</div>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#equipa">Equipa</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <a class="nav-cta" href="mailto:noxx@noxx.pt">Marcar reunião</a>
+  </nav>
+</header>
+
+<div class="ticker-band" aria-hidden="true">
+  <div class="ticker-track">
+    <span>IVA — ENTREGA MENSAL / TRIMESTRAL</span>
+    <span>SEGURANÇA SOCIAL — DIA 10 A 20</span>
+    <span class="hot">MODELO 22 (IRC) — ATÉ 31 MAIO</span>
+    <span>IRS — ABRIL A JUNHO</span>
+    <span>PAGAMENTOS POR CONTA — JUL · SET · DEZ</span>
+    <span>DESDE 1972 — TRÊS GERAÇÕES</span>
+    <span>IVA — ENTREGA MENSAL / TRIMESTRAL</span>
+    <span>SEGURANÇA SOCIAL — DIA 10 A 20</span>
+    <span class="hot">MODELO 22 (IRC) — ATÉ 31 MAIO</span>
+    <span>IRS — ABRIL A JUNHO</span>
+    <span>PAGAMENTOS POR CONTA — JUL · SET · DEZ</span>
+    <span>DESDE 1972 — TRÊS GERAÇÕES</span>
+  </div>
+</div>
+
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="hero-eyebrow">Contabilistas certificados · Lisboa</div>
+    <h1 class="headline">Accounting for life.</h1>
+    <p class="hero-lead">Desde 1972 a fechar contas com precisão e a abrir relações que duram. Contabilidade, fiscalidade e gestão para empresas, particulares e quem chega a Portugal.</p>
+    <div class="hero-cta-row">
+      <a class="btn btn-solid" href="mailto:noxx@noxx.pt">Pedir uma reunião →</a>
+      <a class="btn btn-ghost" href="#servicos">Ver serviços</a>
+    </div>
+    <div class="stat-row">
+      <div class="cell"><span class="n tnum">500+</span><span class="l">Clientes ativos</span></div>
+      <div class="cell"><span class="n tnum">20+</span><span class="l">Nacionalidades</span></div>
+      <div class="cell"><span class="n tnum">50+</span><span class="l">Anos de história</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">A nossa herança</div>
+      <h2 class="title">Três gerações de experiência</h2>
+      <p>Fundada em Lisboa como Norconta, a empresa acompanha o tecido empresarial português há mais de cinco décadas — hoje já na terceira geração familiar, sob o nome Noxx.</p>
+    </div>
+    <div class="entries">
+      <div class="entry">
+        <span class="yr tnum">1972</span>
+        <h3>As origens</h3>
+        <p>Fundação em Lisboa como gabinete de contabilidade tradicional — o trabalho de registar, com rigor, os movimentos financeiros das empresas clientes.</p>
+      </div>
+      <div class="entry">
+        <span class="yr tnum">1986</span>
+        <h3>Portugal na CEE</h3>
+        <p>A entrada de Portugal na então CEE traz novas exigências fiscais e contabilísticas. O gabinete evolui de simples registo para contabilidade e gestão a sério.</p>
+      </div>
+      <div class="entry">
+        <span class="yr tnum">2ª geração</span>
+        <h3>Consolidação</h3>
+        <p>Sob a segunda geração familiar, a empresa consolida-se como parceira de confiança de PME portuguesas — que continuam a formar a maioria da carteira de clientes.</p>
+      </div>
+      <div class="entry">
+        <span class="yr tnum">2022</span>
+        <h3>Torna-se Noxx</h3>
+        <p>Já na terceira geração, a empresa celebra 50 anos com um rebranding: passa a chamar-se Noxx Accounting for Life, mantendo o "No" em homenagem às origens no Norte.</p>
+      </div>
+      <div class="entry">
+        <span class="yr tnum">Hoje</span>
+        <h3>+500 clientes</h3>
+        <p>Particulares, PME e grupos internacionais de mais de 20 nacionalidades — o mesmo compromisso de 1972, à escala de hoje.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="servicos" style="background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">O que fazemos</div>
+      <h2 class="title">Soluções para cada fase do negócio</h2>
+      <p>Empresas, particulares e quem chega a Portugal — cada cliente tratado com o mesmo rigor.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-col">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg></div>
+        <h3>Empresas</h3>
+        <div class="desc">De start-ups a empresas consolidadas, em todos os setores.</div>
+        <ul>
+          <li>Contabilidade &amp; outsourcing</li>
+          <li>Fiscalidade e obrigações fiscais</li>
+          <li>Processamento salarial</li>
+          <li>Consultoria de negócios e gestão</li>
+          <li>Empresas familiares</li>
+          <li>Grupos internacionais e sucursais</li>
+        </ul>
+      </div>
+      <div class="svc-col">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg></div>
+        <h3>Individual</h3>
+        <div class="desc">Planeamento fiscal pessoal, sempre atualizado às regras do ano.</div>
+        <ul>
+          <li>IRS</li>
+          <li>Empresários em nome individual</li>
+          <li>Residentes não habituais</li>
+          <li>Mais-valias e património</li>
+          <li>Arrendamentos e heranças</li>
+          <li>Profissionais liberais</li>
+        </ul>
+      </div>
+      <div class="svc-col">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.7 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.7-3.8-9S9.5 5.5 12 3z"/></svg></div>
+        <h3>Internacional</h3>
+        <div class="desc">Para quem monta negócio ou se instala em Portugal.</div>
+        <ul>
+          <li>Implementação de empresas</li>
+          <li>Obrigações legais e fiscais</li>
+          <li>Contabilidade &amp; outsourcing</li>
+          <li>Consultoria de negócios</li>
+          <li>Sucursais em Portugal</li>
+          <li>Controlo de gestão</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="global">
+  <div class="wrap">
+    <div class="section-head" style="margin:0 auto 40px;text-align:center;">
+      <div class="kicker" style="justify-content:center;">Num mundo global</div>
+      <h2 class="title">O seu negócio, onde ele crescer</h2>
+      <p style="margin:0 auto;">Clientes de mais de 20 nacionalidades, acompanhados a partir de Lisboa.</p>
+    </div>
+    <div class="globe-panel">
+      <div class="globe-wrap">
+        <svg class="globe-svg" viewBox="0 0 340 380" role="img" aria-label="Mapa de rede com Lisboa como sede, ligada a clientes em mais de 20 países">
+          <circle class="globe-ring" cx="170" cy="190" r="140"/>
+          <ellipse class="globe-ring" cx="170" cy="190" rx="140" ry="55"/>
+          <ellipse class="globe-ring" cx="170" cy="190" rx="140" ry="110"/>
+          <ellipse class="globe-ring" cx="170" cy="190" rx="55" ry="140"/>
+          <ellipse class="globe-ring" cx="170" cy="190" rx="110" ry="140"/>
+          <g class="globe-spokes">
+            <line x1="170" y1="190" x2="90" y2="120"/>
+            <line x1="170" y1="190" x2="150" y2="80"/>
+            <line x1="170" y1="190" x2="215" y2="95"/>
+            <line x1="170" y1="190" x2="255" y2="140"/>
+            <line x1="170" y1="190" x2="270" y2="195"/>
+            <line x1="170" y1="190" x2="235" y2="250"/>
+            <line x1="170" y1="190" x2="175" y2="275"/>
+            <line x1="170" y1="190" x2="110" y2="260"/>
+            <line x1="170" y1="190" x2="70" y2="215"/>
+            <line x1="170" y1="190" x2="55" y2="165"/>
+            <line x1="170" y1="190" x2="100" y2="85"/>
+            <line x1="170" y1="190" x2="230" y2="130"/>
+            <line x1="170" y1="190" x2="140" y2="255"/>
+            <line x1="170" y1="190" x2="230" y2="90"/>
+          </g>
+          <g class="globe-nodes">
+            <circle class="node" cx="90" cy="120" r="4"/><text class="node-label" x="90" y="110" text-anchor="middle">EUA</text>
+            <circle class="node" cx="150" cy="80" r="4"/><text class="node-label" x="150" y="70" text-anchor="middle">UK</text>
+            <circle class="node" cx="215" cy="95" r="4"/><text class="node-label" x="215" y="85" text-anchor="middle">ES</text>
+            <circle class="node" cx="255" cy="140" r="4"/><text class="node-label" x="270" y="140" text-anchor="start">FR</text>
+            <circle class="node" cx="270" cy="195" r="4"/><text class="node-label" x="285" y="199" text-anchor="start">IT</text>
+            <circle class="node" cx="235" cy="250" r="4"/><text class="node-label" x="250" y="254" text-anchor="start">BE</text>
+            <circle class="node" cx="175" cy="275" r="4"/><text class="node-label" x="175" y="292" text-anchor="middle">DE</text>
+            <circle class="node" cx="110" cy="260" r="4"/><text class="node-label" x="110" y="277" text-anchor="middle">BR</text>
+            <circle class="node" cx="70" cy="215" r="4"/><text class="node-label" x="55" y="219" text-anchor="end">AR</text>
+            <circle class="node" cx="55" cy="165" r="4"/><text class="node-label" x="40" y="169" text-anchor="end">CN</text>
+            <circle class="node" cx="100" cy="85" r="4"/><text class="node-label" x="100" y="75" text-anchor="middle">IL</text>
+            <circle class="node" cx="230" cy="130" r="4"/><text class="node-label" x="245" y="130" text-anchor="start">LB</text>
+            <circle class="node" cx="140" cy="255" r="4"/><text class="node-label" x="140" y="272" text-anchor="middle">MZ</text>
+            <circle class="node" cx="230" cy="90" r="4"/><text class="node-label" x="245" y="90" text-anchor="start">IN</text>
+          </g>
+          <circle class="hub-pulse" cx="170" cy="190" r="6"/>
+          <circle class="hub" cx="170" cy="190" r="6"/>
+        </svg>
+        <div class="hub-caption"><span class="dot"></span>Lisboa · Sede</div>
+      </div>
+      <div class="flags">
+        <span class="flag"><b>PT</b>Portugal</span>
+        <span class="flag"><b>US</b>EUA</span>
+        <span class="flag"><b>GB</b>Reino Unido</span>
+        <span class="flag"><b>ES</b>Espanha</span>
+        <span class="flag"><b>FR</b>França</span>
+        <span class="flag"><b>IT</b>Itália</span>
+        <span class="flag"><b>BE</b>Bélgica</span>
+        <span class="flag"><b>DE</b>Alemanha</span>
+        <span class="flag"><b>BR</b>Brasil</span>
+        <span class="flag"><b>AR</b>Argentina</span>
+        <span class="flag"><b>CN</b>China</span>
+        <span class="flag"><b>IL</b>Israel</span>
+        <span class="flag"><b>LB</b>Líbano</span>
+        <span class="flag"><b>MZ</b>Moçambique</span>
+        <span class="flag"><b>IN</b>Índia</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="equipa" style="background:var(--surface);border-top:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Equipa</div>
+      <h2 class="title">Quem trata das suas contas</h2>
+      <p>Experiência de três gerações e energia de especialistas em contabilidade, fiscalidade e gestão.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-row"><div class="avatar">ML</div><h3>Madalena Leite Ribeiro</h3><div class="role">CEO</div><a href="mailto:madalenacosta@noxx.pt">madalenacosta@noxx.pt</a></div>
+      <div class="team-row"><div class="avatar">BC</div><h3>Bruno Ribeiro de Cerqueira</h3><div class="role">COO</div><a href="mailto:brunocerqueira@noxx.pt">brunocerqueira@noxx.pt</a></div>
+      <div class="team-row"><div class="avatar">CR</div><h3>Célia Rodrigues</h3><div class="role">Team Leader</div><a href="mailto:celiarodrigues@noxx.pt">celiarodrigues@noxx.pt</a></div>
+      <div class="team-row"><div class="avatar">BS</div><h3>Beatriz Fernandes da Silva</h3><div class="role">Team Leader</div><a href="mailto:beatrizsilva@noxx.pt">beatrizsilva@noxx.pt</a></div>
+      <div class="team-row"><div class="avatar">SS</div><h3>Soraia Silva</h3><div class="role">Consultant</div><a href="mailto:soraiasilva@noxx.pt">soraiasilva@noxx.pt</a></div>
+      <div class="team-row"><div class="avatar">MR</div><h3>Margarida Franco Raposo</h3><div class="role">Consultant</div><a href="mailto:margaridaraposo@noxx.pt">margaridaraposo@noxx.pt</a></div>
+      <div class="team-row"><div class="avatar">CG</div><h3>Catarina Galado</h3><div class="role">Consultant</div><a href="mailto:catarinagalado@noxx.pt">catarinagalado@noxx.pt</a></div>
+      <div class="team-row"><div class="avatar">MG</div><h3>Martim Brito Gomes</h3><div class="role">Consultant</div><a href="mailto:martimgomes@noxx.pt">martimgomes@noxx.pt</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <div class="contact-panel">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="kicker" style="color:var(--band-accent);">Contacto</div>
+          <h2 class="title" style="color:var(--band-fg);">Fale com a Noxx</h2>
+          <div class="row"><h4>Morada</h4><p>Edifício Espaço Castilho<br>Rua Castilho 13D, 3º B<br>1250-066 Lisboa · Portugal</p></div>
+          <div class="row"><h4>Contacto</h4><p>+351 213 536 538<br>noxx@noxx.pt</p></div>
+          <div class="row"><h4>Horário</h4><p>Segunda a sexta, 9h00 – 18h00</p></div>
+          <a class="map-embed" href="https://maps.google.com/?q=Rua+Castilho+13D,+1250-066+Lisboa" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;padding:14px 22px;text-decoration:none;color:var(--band-fg-soft);">
+            <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:1.2px;">Ver no Google Maps</span>
+            <span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:18px;color:var(--band-fg);">↗</span>
+          </a>
+        </div>
+        <div class="cta-block">
+          <p class="big">Vamos acertar as suas contas.</p>
+          <p class="sub">Escreva-nos e respondemos, em regra, no próprio dia útil.</p>
+          <a class="btn btn-solid" href="mailto:noxx@noxx.pt">noxx@noxx.pt →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>© 2026 NOXX ACCOUNTING FOR LIFE &amp; PARTNERS, LDA.</span>
+    <span>NIF 504118420</span>
+    <span>RUA CASTILHO 13D · LISBOA</span>
+  </div>
+</footer>
+
+</body>
+</html>
